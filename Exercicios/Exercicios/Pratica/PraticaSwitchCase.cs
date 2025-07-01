@@ -1,5 +1,4 @@
-﻿
-namespace Exercicios
+﻿namespace Exercicios.Pratica
 {
     internal class PraticaSwitchCase
     {
@@ -47,7 +46,7 @@ namespace Exercicios
                 case 'I':
                 case 'J':
                     numeroFila = 2;
-                break;
+                    break;
 
                 case 'K':
                 case 'L':
@@ -59,7 +58,7 @@ namespace Exercicios
                 case 'R':
                 case 'S':
                     numeroFila = 1;
-                break;
+                    break;
 
                 case 'T':
                 case 'U':
@@ -69,7 +68,7 @@ namespace Exercicios
                 case 'Y':
                 case 'Z':
                     numeroFila = 3;
-                break;
+                    break;
             }
 
             Console.WriteLine($"O numero da sua fila é: {numeroFila}");
@@ -91,7 +90,7 @@ namespace Exercicios
 
                 int numeroFila = 0;
 
-                int asciiCode = (int)inicialNome;
+                int asciiCode = inicialNome;
 
                 if (asciiCode >= 65 && asciiCode <= 74)
                     numeroFila = 2;

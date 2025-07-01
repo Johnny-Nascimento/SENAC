@@ -1,6 +1,6 @@
 ﻿using System.Timers;
 
-namespace Exercicios
+namespace Exercicios.Pratica
 {
     public class Musica
     {
@@ -35,7 +35,7 @@ namespace Exercicios
             Play(ids[index]);
         }
 
-        private static void OnTocandoMusica(Object source, ElapsedEventArgs e, Musica musica)
+        private static void OnTocandoMusica(object source, ElapsedEventArgs e, Musica musica)
         {
             Console.Clear();
             Console.WriteLine($"Tocando {musica.Nome} - {musica.Banda} | {musica.Duracao.ToLongTimeString()}");
@@ -80,19 +80,19 @@ namespace Exercicios
 
                 case ConsoleKey.RightArrow:
                     ProximaMusica();
-                break;
+                    break;
 
                 case ConsoleKey.LeftArrow:
                     MusicaAnterior();
-                break;
+                    break;
 
                 case ConsoleKey.Add:
                     AumentaVolume();
-                break;
+                    break;
 
                 case ConsoleKey.Subtract:
                     AbaixaVolume();
-                break;
+                    break;
             }
         }
 

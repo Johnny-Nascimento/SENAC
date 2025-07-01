@@ -1,22 +1,24 @@
-﻿namespace Exercicios
+﻿using Exercicios.Pratica;
+
+// break;
+// continue;
+// não usar -> {} poder usar no switch case
+// String.Join
+// ?? ??= .?
+/* for(int i, j k;
+ i== 1 || j == 1 || k == 1;
+ ++i, ++j, ++k) */
+// (out _)
+// TimeOnly
+// Atalhos VS
+
+namespace Exercicios
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            // BibliotecaDeMusicas biblioteca = new BibliotecaDeMusicas(new List<Musica> { 
-            //     new Musica(Guid.NewGuid(), "Digito"          , "Telefones", new TimeOnly(0, 0, 10)),
-            //     new Musica(Guid.NewGuid(), "Alo"             , "Telefones", new TimeOnly(0, 0, 15)),
-            //     new Musica(Guid.NewGuid(), "Orelhão"         , "Telefones", new TimeOnly(0, 0, 8)),
-            //     new Musica(Guid.NewGuid(), "Chamada a cobrar", "Telefones", new TimeOnly(0, 0, 5)),
-            // }, 100);
-            // 
-            // biblioteca.PlayRandom();
-
-            // PraticaWhile.Executar1();
-            // PraticaWhile.Executar2();
-
-            double.TryParse("a", out _);
+            PraticaForEach.Executar();
         }
     }
 }

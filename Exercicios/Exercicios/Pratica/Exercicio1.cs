@@ -1,5 +1,4 @@
-﻿
-namespace Exercicios
+﻿namespace Exercicios.Pratica
 {
     internal class Exercicio1
     {

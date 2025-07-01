@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exercicios
+namespace Exercicios.Pratica
 {
     internal class PraticaIfElse
     {
@@ -33,7 +33,7 @@ namespace Exercicios
 
         public static void Execuar2()
         {
-            PraticaIfElse.Executar();
+            Executar();
 
             List<string> convidados = new List<string>
             { "ANA"

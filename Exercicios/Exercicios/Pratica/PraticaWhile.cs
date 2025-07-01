@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 
-namespace Exercicios
+namespace Exercicios.Pratica
 {
     internal class PraticaWhile
     {
         public static void Executar()
         {
-            int maiorValor = 0;
+            int maiorValor = int.MinValue;
             int menorValor = int.MaxValue;
 
             Console.WriteLine("Informe um valor");

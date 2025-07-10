@@ -10,10 +10,7 @@ public class Produto
 
     public static string FormataValor(Produto produto, bool internacional = false)
     {
-        if (internacional)
-            return produto.Preco.ToString("C", new CultureInfo("en-US"));
-        else
-            return produto.Preco.ToString("C");
+        return produto.Preco.ToString("C", new CultureInfo(internacional ? "en-US" : "pt-BR"));
     }
 
     public Produto(string nome, double preco) 

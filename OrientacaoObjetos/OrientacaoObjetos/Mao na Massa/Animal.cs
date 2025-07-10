@@ -2,9 +2,30 @@
 
 public class Animal
 {
-    public string Nome { get; set; }
-    public string NomeCientifico { get; set; }
-    public int Idade { get; set; }
+    public string Nome { get; private set; }
+    public string NomeCientifico { get; private set; }
+    public int Idade { get; private set; }
+
+    public Animal AdicionaNome(string nome)
+    {
+        Nome = nome;
+
+        return this;
+    }
+
+    public Animal AdicionaNomeCientifico(string nomeCientifico)
+    {
+        NomeCientifico = nomeCientifico;
+
+        return this;
+    }
+
+    public Animal AdicionaIdade(int idade)
+    {
+        Idade = idade;
+
+        return this;
+    }
 
     public void Morder()
     {

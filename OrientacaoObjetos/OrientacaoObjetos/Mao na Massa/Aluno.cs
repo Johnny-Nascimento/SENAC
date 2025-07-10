@@ -31,10 +31,8 @@ public class Aluno
         Matricula = string.Empty;
     }
 
-    public Aluno(string nome, int idade, string matricula)
+    public Aluno(string nome, int idade, string matricula) : this(nome, idade)
     {
-        Nome = nome;
-        Idade = idade;
         Matricula = matricula;
     }
 

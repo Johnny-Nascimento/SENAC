@@ -30,6 +30,14 @@ internal class Program
 
         // Console.WriteLine(coelho.ToString());
 
+        // Fluent
+        // Animal cachorro = new Animal().
+        //     AdicionaNome("Cachorro").
+        //     AdicionaNomeCientifico("Cachorro cientifico").
+        //     AdicionaIdade(10);
+
+        // Console.WriteLine(cachorro.ToString());
+
         // Livro harryPotter = new Livro();
         // harryPotter.Titulo = "Harry Potter";
         // harryPotter.Autor = "Não sei";
@@ -42,14 +50,14 @@ internal class Program
         // Console.WriteLine(calculadora.Dividir(4, 5));
         // Console.WriteLine(calculadora.Multiplicar(4, 5));
 
-        // Aluno aluno = new ("João", 50);
+        // Aluno aluno = new ("João", 20);
         // Aluno aluno2 = new ("Mario", 10, "1234XYZ");
-        // 
+
         // aluno.CalcularIdadeEmMeses();
         // aluno.ExibirInfo();
-        // aluno2.ExibirInfo();
         // aluno2.CalcularIdadeEmMeses();
-        // 
+        // aluno2.ExibirInfo();
+        
         // ContaBancaria conta = new ("Jorge");
         // conta.Sacar(10);
         // conta.ExibirSaldo();
@@ -66,22 +74,15 @@ internal class Program
         // conta2.Sacar(10);
         // conta2.ExibirSaldo();
 
-    /*
-     Emprestimo
-        Pra pegar precisa ter 500% do valor em conta
-        Valor do emprestimo não deve ser 50% maior que a rendaRenda declarada 
-        Não pode ter emprestimo ativo
-    */
-
-        var a = new ContaBancaria("Teste", 25000m, 1001m);
-        a.Emprestimo(500.00m);
+        // var a = new ContaBancaria("Teste", 25000m, 1001m);
+        // a.Emprestimo(500.00m);
 
         // var b = new ContaBancaria("Teste", 10.00m, 500.00m);
         // var c = new ContaBancaria("Teste", 15.00m, 0);
         // var d = new ContaBancaria("Teste", 5.00m, 100.00m);
 
-        ContaBancaria.QuantidadeContas();
-        ContaBancaria.SaldoTotal();
+        // ContaBancaria.QuantidadeContas();
+        // ContaBancaria.SaldoTotal();
 
         // Produto produto = new Produto("Batata", 10.00);
         // Console.WriteLine(Produto.FormataValor(produto));

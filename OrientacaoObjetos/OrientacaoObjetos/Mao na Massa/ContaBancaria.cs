@@ -1,11 +1,11 @@
-﻿using System;
-using System.Drawing;
-using System.Xml;
-
+﻿
 namespace OrientacaoObjetos.Mao_na_Massa;
 
 public class ContaBancaria
 {
+    private const decimal FATOR_PROVISIONAMENTO = 5;
+    private const decimal PERCENTUAL_RENDA = 0.5m;
+
     private static decimal _valorTotalContas = 0;
     private static int _contagemContas = 0;
 
@@ -43,14 +43,14 @@ public class ContaBancaria
         AdicionaContador();
     }
 
-    private bool Saldo500PorCentoMaior(decimal valor)
+    private bool ProvisionamentoBanco500PorCentoMaior(decimal valor)
     {
-        return Saldo >= (valor * 5);
+        return _valorTotalContas >= (valor * FATOR_PROVISIONAMENTO);
     }
 
     private bool ValorMenorQue50PorCentoDaRenda(decimal valor)
     {
-        return valor < (Renda / 2);
+        return valor <= (Renda * PERCENTUAL_RENDA);
     }
 
     private static void AdicionaContador()
@@ -100,6 +100,12 @@ public class ContaBancaria
         Console.WriteLine($"Saldo {Saldo}");
     }
 
+    /*
+     Emprestimo
+        Não pode ter emprestimo ativo
+        Pra pegar o banco precisa ter 500% do valor em conta
+        Valor do emprestimo não deve ser 50% maior que a rendaRenda declarada 
+    */
     public void Emprestimo(decimal valor)
     {
         if (valor <= 0)
@@ -109,12 +115,11 @@ public class ContaBancaria
         }
 
         if (!EmprestimoAtivo
-          && Saldo500PorCentoMaior(valor)
+          && ProvisionamentoBanco500PorCentoMaior(valor)
           && ValorMenorQue50PorCentoDaRenda(valor)
            )
         {
             Saldo += valor;
-            _valorTotalContas += valor;
 
             EmprestimoAtivo = true;
 

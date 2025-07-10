@@ -6,8 +6,8 @@ public class ContaBancaria
     private const decimal FATOR_PROVISIONAMENTO = 5;
     private const decimal PERCENTUAL_RENDA = 0.5m;
 
-    private static decimal _valorTotalContas = 0;
-    private static int _contagemContas = 0;
+    private static decimal _ValorTotalContas = 0;
+    private static int _ContagemContas = 0;
 
     public string  Titular { get; set; }
     public decimal Saldo { get; set; }
@@ -35,7 +35,7 @@ public class ContaBancaria
         else
         {
             Saldo = saldo;
-            _valorTotalContas += saldo;
+            _ValorTotalContas += saldo;
         }
 
         Renda = renda >= 0 ? renda : 0;
@@ -45,7 +45,7 @@ public class ContaBancaria
 
     private bool ProvisionamentoBanco500PorCentoMaior(decimal valor)
     {
-        return _valorTotalContas >= (valor * FATOR_PROVISIONAMENTO);
+        return _ValorTotalContas >= (valor * FATOR_PROVISIONAMENTO);
     }
 
     private bool ValorMenorQue50PorCentoDaRenda(decimal valor)
@@ -55,17 +55,17 @@ public class ContaBancaria
 
     private static void AdicionaContador()
     {
-        _contagemContas++;
+        _ContagemContas++;
     }
 
     public static void SaldoTotal()
     {
-        Console.WriteLine($"Saldo total atual é {_valorTotalContas}");
+        Console.WriteLine($"Saldo total atual é {_ValorTotalContas}");
     }
 
     public static void QuantidadeContas()
     {
-        Console.WriteLine($"A quantidade de contas atual é {_contagemContas}");
+        Console.WriteLine($"A quantidade de contas atual é {_ContagemContas}");
     }
 
     public void Depositar(decimal valor)
@@ -79,7 +79,7 @@ public class ContaBancaria
 
         Saldo += valor;
 
-        _valorTotalContas += valor;
+        _ValorTotalContas += valor;
     }
 
     public void Sacar(decimal valor)
@@ -92,7 +92,7 @@ public class ContaBancaria
 
         Saldo -= valor;
 
-        _valorTotalContas -= valor;
+        _ValorTotalContas -= valor;
     }
 
     public void ExibirSaldo()

@@ -2,8 +2,8 @@
 
 public class Animal
 {
-    public string Nome { get; private set; }
-    public string NomeCientifico { get; private set; }
+    public string Nome { get; private set; } = string.Empty;
+    public string NomeCientifico { get; private set; } = string.Empty;
     public int Idade { get; private set; }
 
     public Animal AdicionaNome(string nome)

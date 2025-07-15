@@ -8,8 +8,8 @@ namespace OrientacaoObjetos.Mao_na_Massa
 {
     public class Livro
     {
-        public string Titulo { get; set; }
-        public string Autor { get; set; }
+        public string Titulo { get; set; } = string.Empty;
+        public string Autor { get; set; } = string.Empty;
 
         public override string ToString()
         {

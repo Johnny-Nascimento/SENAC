@@ -1,5 +1,4 @@
-﻿
-namespace OrientacaoObjetos.Mao_na_Massa;
+﻿namespace OrientacaoObjetos.Mao_na_Massa;
 
 public class ContaBancaria
 {
@@ -13,17 +12,21 @@ public class ContaBancaria
     public decimal Saldo { get; set; }
     public decimal Renda { get; set; }
     public bool EmprestimoAtivo { get; private set; }
+    public PokemonInicial PokemonInicial { get; set; }
 
-    public ContaBancaria(string titular)
+    public ContaBancaria(string titular, PokemonInicial pokemonInicial, int a = 1, int b = 2)
     {
+        Console.WriteLine(a + " " +  b);
+
         Titular = titular;
         Saldo = 0.00m;
         Renda = 0.0m;
+        PokemonInicial = pokemonInicial;
 
         AdicionaContador();
     }
 
-    public ContaBancaria(string titular, decimal saldo, decimal renda)
+    public ContaBancaria(string titular, decimal saldo, decimal renda, PokemonInicial pokemonInicial)
     {
         Titular = titular;
 
@@ -41,6 +44,7 @@ public class ContaBancaria
         Renda = renda >= 0 ? renda : 0;
 
         AdicionaContador();
+        PokemonInicial = pokemonInicial;
     }
 
     private bool ProvisionamentoBanco500PorCentoMaior(decimal valor)
@@ -108,6 +112,12 @@ public class ContaBancaria
     */
     public void Emprestimo(decimal valor)
     {
+        if (PokemonInicial == PokemonInicial.Bulbassauro)
+        {
+            Console.WriteLine($"Você não merece por sua escolha de {PokemonInicial.ToString()}");
+            return;
+        }
+
         if (valor <= 0)
         {
             Console.WriteLine("Valor de emprestimo inválido!");

@@ -26,6 +26,59 @@ public class Produto
         QuantidadeEstoque = quantidadeEstoque;
     }
 
+    public static List<Produto> Comprar2(List<Produto> produtos, double valorPagamento, out double troco)
+    {
+        troco = valorPagamento;
+
+        double valorTotalCompra = produtos.Sum(p => p.Preco);
+
+        if (valorTotalCompra > valorPagamento)
+        {
+            Console.WriteLine("Você não deu dinheiro o suficiente, compra cancelada!");
+            produtos.Clear();
+        }
+        else
+            troco = valorPagamento - valorTotalCompra;
+
+        Console.WriteLine($"Seu troco é = { troco.ToString("C2") }");
+
+        return produtos;
+    }
+
+    public static List<Produto> Comprar(List<Produto> produtos, double valorPagamento, out double troco)
+    {
+        bool compraOk = true;
+
+        double valorTotal = valorPagamento;
+        troco = valorTotal;
+
+        foreach (var item in produtos)
+        {
+            if (item.Preco > valorTotal)
+            {
+                Console.WriteLine("Você não deu dinheiro o suficiente, compra cancelada!");
+                compraOk = false;
+                break;
+            }
+            else
+                Console.WriteLine($"Produto {item.Nome} passou!");
+
+            valorTotal -= item.Preco;
+        }
+
+        if (compraOk)
+            troco = valorTotal;
+        else
+        {
+            troco = valorPagamento;
+            produtos.Clear();
+        }
+            
+        Console.WriteLine($"Troco: {troco.ToString("C2")}");
+
+        return produtos;
+    }
+
     public void AtualizarEstoque(int quantidade)
     {
         QuantidadeEstoque = quantidade;

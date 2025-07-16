@@ -14,72 +14,6 @@ public class Menu
         Invalida
     }
 
-    private static void RealizarLancamento()
-    {
-        const string NAVE_DECOLANDO = "       !\r\n       !\r\n       ^\r\n      / \\\r\n     /___\\\r\n    |=   =|\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n   /|##!##|\\\r\n  / |##!##| \\\r\n /  |##!##|  \\\r\n|  /      \\  |\r\n| /        \\ |\r\n|/          \\|\r\n";
-        const string NAVE_VOANDO = "       !\r\n       !\r\n       ^\r\n      / \\\r\n     /___\\\r\n    |=   =|\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n   /|##!##|\\\r\n  / |##!##| \\\r\n /  |##!##|  \\\r\n|  / ^ | ^ \\  |\r\n| /  ( | )  \\ |\r\n|/   ( | )   \\|\r\n    ((   ))\r\n   ((  :  ))\r\n   ((  :  ))\r\n    ((   ))\r\n     (( ))\r\n      ( )\r\n       .\r\n       .\r\n       .";
-
-        Console.WriteLine("Selecione o numero de identificação dos astronautas separado por: , (ex: 1,2,3,7)");
-        var astronautas = AstronautaDB.Astronautas;
-        for (int i = 0; i < astronautas.Count; ++i)
-        {
-            Console.Write(i + 1 + " - ");
-            Console.WriteLine(astronautas[i].ToString());
-        }
-
-        string[] idsAstronauta = Console.ReadLine().Split(",");
-
-        // Validar dados ?
-        // Validar dados ?
-
-        List<Astronauta> astronautasParaLancamento = new List<Astronauta>();
-
-        foreach (var id in idsAstronauta)
-        {
-            int idInteiro = int.Parse(id);
-
-            astronautasParaLancamento.Add(astronautas[idInteiro - 1]);
-        }
-
-        Console.WriteLine("Informe o nome da missão");
-        string nomeDaMissao = Console.ReadLine();
-
-        Console.WriteLine("Informe a duração em dias da missão");
-        int duracaoMissao = int.Parse(Console.ReadLine());
-
-        // Validar dados ?
-        // Validar dados ?
-
-        new MissaoEspacial(astronautasParaLancamento, nomeDaMissao, duracaoMissao);
-
-        Console.Clear();
-
-        Console.WriteLine($"Contagem regressiva para lançamento da missão {nomeDaMissao}");
-
-        for (int i = 10; i >= 0; --i)
-        {
-            Console.WriteLine(i);
-            Thread.Sleep(1000);
-        }
-
-        Thread.Sleep(500);
-
-        Console.BackgroundColor = ConsoleColor.DarkBlue;
-        Console.Clear();
-        Console.WriteLine(NAVE_DECOLANDO);
-        Thread.Sleep(1000);
-        Console.Clear();
-        Console.WriteLine(NAVE_VOANDO);
-
-        Console.WriteLine();
-        Console.WriteLine("A missão foi lançada com sucesso!");
-        Console.WriteLine();
-        Console.WriteLine("Aperte qualquer tecla para voltar...");
-        Console.ReadKey();
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.Clear();
-    }
-
     private static void MostraOpcoesTexto()
     {
         Console.WriteLine("Menu");
@@ -106,23 +40,22 @@ public class Menu
             {
                 case OpcoesMenu.CadastrarAstronauta:
                     AstronautaDB.CadastrarAstronauta();
-                    break;
+                break;
 
                 case OpcoesMenu.RealizarLancamento:
-                    RealizarLancamento();
-                    break;
+                    MissaoEspacial.RealizarLancamento();
+                break;
 
                 case OpcoesMenu.AtualizarResultadoMissao:
-                    Console.WriteLine("Informe o nome da missão");
-                    MissaoEspacial.AtualizarResultado(Console.ReadLine());
-                    break;
+                    MissaoEspacial.AtualizarResultado();
+                break;
 
                 case OpcoesMenu.Sair:
-                    break;
+                break;
 
                 default:
                     Console.WriteLine("Opção inválida tente novamente.");
-                    break;
+                break;
             }
         }
         while (opcaoMenu != OpcoesMenu.Sair);

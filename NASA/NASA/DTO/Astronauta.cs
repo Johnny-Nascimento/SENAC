@@ -2,9 +2,9 @@
 
 public class Astronauta
 {
-    public string Nome { get; set; }
-    public DateOnly DataNascimento { get; set; }
-    public string PaisOrigem { get; set; }
+    public string Nome { get; }
+    public DateOnly DataNascimento { get; }
+    public string PaisOrigem { get; }
 
     public Astronauta(string nome, DateOnly data, string paisOrigem)
     {

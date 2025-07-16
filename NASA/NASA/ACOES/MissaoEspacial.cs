@@ -6,7 +6,7 @@ namespace NASA.ACOES;
 public class MissaoEspacial
 {
     public List<Astronauta> Astronautas { get; set; }
-    public string NomeMissao { get; set; }
+    public string NomeMissao { get; set; } = string.Empty;
     public int DiasDuracao { get; set; }
 
     private static List<MissaoEspacial> Missoes { get; set; } = new List<MissaoEspacial>();
@@ -27,9 +27,6 @@ public class MissaoEspacial
 
     public static void RealizarLancamento()
     {
-        const string NAVE_DECOLANDO = "       !\r\n       !\r\n       ^\r\n      / \\\r\n     /___\\\r\n    |=   =|\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n   /|##!##|\\\r\n  / |##!##| \\\r\n /  |##!##|  \\\r\n|  /      \\  |\r\n| /        \\ |\r\n|/          \\|\r\n";
-        const string NAVE_VOANDO = "       !\r\n       !\r\n       ^\r\n      / \\\r\n     /___\\\r\n    |=   =|\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n   /|##!##|\\\r\n  / |##!##| \\\r\n /  |##!##|  \\\r\n|  / ^ | ^ \\  |\r\n| /  ( | )  \\ |\r\n|/   ( | )   \\|\r\n    ((   ))\r\n   ((  :  ))\r\n   ((  :  ))\r\n    ((   ))\r\n     (( ))\r\n      ( )\r\n       .\r\n       .\r\n       .";
-
         Console.WriteLine("Selecione o numero de identificação dos astronautas separado por: , (ex: 1,2,3,7)");
         Console.WriteLine("Apenas astronautas existentes serão adicionados.");
         var astronautas = AstronautaDB.Astronautas;
@@ -39,7 +36,7 @@ public class MissaoEspacial
             Console.WriteLine(astronautas[i].ToString());
         }
 
-        string[] idsAstronauta = Console.ReadLine().Split(",");
+        string[] idsAstronauta = Console.ReadLine()?.Split(",");
 
         List<Astronauta> astronautasParaLancamento = new List<Astronauta>();
 
@@ -51,6 +48,11 @@ public class MissaoEspacial
 
         Console.WriteLine("Informe o nome da missão");
         string nomeDaMissao = Console.ReadLine();
+        if (string.IsNullOrEmpty(nomeDaMissao))
+        {
+            Console.WriteLine("Nome da missão não pode ser vazio ou nulo.");
+            return;
+        }
 
         Console.WriteLine("Informe a duração em dias da missão");
         if (!int.TryParse(Console.ReadLine(), out int duracaoMissao))
@@ -74,6 +76,9 @@ public class MissaoEspacial
         }
 
         Thread.Sleep(500);
+
+        const string NAVE_DECOLANDO = "       !\r\n       !\r\n       ^\r\n      / \\\r\n     /___\\\r\n    |=   =|\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n   /|##!##|\\\r\n  / |##!##| \\\r\n /  |##!##|  \\\r\n|  /      \\  |\r\n| /        \\ |\r\n|/          \\|\r\n";
+        const string NAVE_VOANDO = "       !\r\n       !\r\n       ^\r\n      / \\\r\n     /___\\\r\n    |=   =|\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n   /|##!##|\\\r\n  / |##!##| \\\r\n /  |##!##|  \\\r\n|  / ^ | ^ \\  |\r\n| /  ( | )  \\ |\r\n|/   ( | )   \\|\r\n    ((   ))\r\n   ((  :  ))\r\n   ((  :  ))\r\n    ((   ))\r\n     (( ))\r\n      ( )\r\n       .\r\n       .\r\n       .";
 
         Console.BackgroundColor = ConsoleColor.DarkBlue;
         Console.Clear();

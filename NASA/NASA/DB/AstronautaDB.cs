@@ -34,6 +34,11 @@ public class AstronautaDB
 
         Console.WriteLine("Informe o pais de origem do astronauta");
         string paisOrigem = Console.ReadLine();
+        if (string.IsNullOrEmpty(paisOrigem))
+        {
+            Console.WriteLine("Pais não pode ser vazio ou nulo.");
+            return;
+        }
 
         Astronautas.Add(new Astronauta(nomeAstronauta, dataNascimento, paisOrigem));
 

@@ -7,7 +7,7 @@ internal class Program
     static void Main(string[] args)
     {
         // Seed inicial
-        new AstronautaDB();
+        AstronautaDB.CarregaDadosIniciais();
 
         // Chama Aplicação
         Menu.Mostrar();

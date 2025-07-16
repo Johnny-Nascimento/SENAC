@@ -6,7 +6,7 @@ public class AstronautaDB
 {
     public static List<Astronauta> Astronautas { get; } = new List<Astronauta>();
 
-    public AstronautaDB()
+    public static void CarregaDadosIniciais()
     {
         // Dados para facilitar testes
         Astronautas.Add(new Astronauta("Jorge", new DateOnly(2025, 01, 01), "Brasil"));
@@ -18,15 +18,22 @@ public class AstronautaDB
     {
         Console.WriteLine("Informe o nome do astronauta");
         string nomeAstronauta = Console.ReadLine();
+        
+        if (string.IsNullOrEmpty(nomeAstronauta))
+        {
+            Console.WriteLine("Nome não pode ser vazio ou nulo.");
+            return;
+        }
 
         Console.WriteLine("Informe a data de nascimento do astronauta DD/MM/AA");
-        DateOnly dataNascimento = DateOnly.Parse(Console.ReadLine());
+        if (!DateOnly.TryParse(Console.ReadLine(), out DateOnly dataNascimento))
+        {
+            Console.WriteLine("Data de nascimento inválida, tente novamente.");
+            return;
+        }
 
         Console.WriteLine("Informe o pais de origem do astronauta");
         string paisOrigem = Console.ReadLine();
-
-        // Validar dados ?
-        // Validar dados ?
 
         Astronautas.Add(new Astronauta(nomeAstronauta, dataNascimento, paisOrigem));
 

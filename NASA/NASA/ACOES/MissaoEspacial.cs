@@ -31,6 +31,7 @@ public class MissaoEspacial
         const string NAVE_VOANDO = "       !\r\n       !\r\n       ^\r\n      / \\\r\n     /___\\\r\n    |=   =|\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n   /|##!##|\\\r\n  / |##!##| \\\r\n /  |##!##|  \\\r\n|  / ^ | ^ \\  |\r\n| /  ( | )  \\ |\r\n|/   ( | )   \\|\r\n    ((   ))\r\n   ((  :  ))\r\n   ((  :  ))\r\n    ((   ))\r\n     (( ))\r\n      ( )\r\n       .\r\n       .\r\n       .";
 
         Console.WriteLine("Selecione o numero de identificação dos astronautas separado por: , (ex: 1,2,3,7)");
+        Console.WriteLine("Apenas astronautas existentes serão adicionados.");
         var astronautas = AstronautaDB.Astronautas;
         for (int i = 0; i < astronautas.Count; ++i)
         {
@@ -40,26 +41,23 @@ public class MissaoEspacial
 
         string[] idsAstronauta = Console.ReadLine().Split(",");
 
-        // Validar dados ?
-        // Validar dados ?
-
         List<Astronauta> astronautasParaLancamento = new List<Astronauta>();
 
         foreach (var id in idsAstronauta)
         {
-            int idInteiro = int.Parse(id);
-
-            astronautasParaLancamento.Add(astronautas[idInteiro - 1]);
+            if (int.TryParse(id, out int idInteiro) && --idInteiro < astronautas.Count )
+                astronautasParaLancamento.Add(astronautas[idInteiro]);
         }
 
         Console.WriteLine("Informe o nome da missão");
         string nomeDaMissao = Console.ReadLine();
 
         Console.WriteLine("Informe a duração em dias da missão");
-        int duracaoMissao = int.Parse(Console.ReadLine());
-
-        // Validar dados ?
-        // Validar dados ?
+        if (!int.TryParse(Console.ReadLine(), out int duracaoMissao))
+        {
+            Console.WriteLine("A duraçaõ da missão é inválida, será entendido que a missão ira durar 1 dia.");
+            duracaoMissao = 1;
+        }
 
         new MissaoEspacial().CarregaDados(astronautasParaLancamento, nomeDaMissao, duracaoMissao);
 

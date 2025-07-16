@@ -54,7 +54,10 @@ public class Menu
                 break;
 
                 default:
-                    Console.WriteLine("Opção inválida tente novamente.");
+                    Console.WriteLine("Opção inválida, tente novamente");
+                    Console.WriteLine("Aperte qualquer tecla para continuar.");
+                    Console.ReadKey();
+                    Console.Clear();
                 break;
             }
         }

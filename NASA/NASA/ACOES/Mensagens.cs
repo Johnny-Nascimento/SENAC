@@ -2,8 +2,8 @@
 
 public class MensagensAleatorias
 {
-    private const int LINHAS_INICIAL = 1;
-    private const int LINHAS_ARQUIVOS = 100;
+    private const int LINHAS_INICIAL = 0;
+    private const int LINHAS_ARQUIVOS = 99;
 
     private static List<string> AcontecimentosAstronautas = new List<string>();
     private static List<string> AcontecimentosMissao = new List<string>();

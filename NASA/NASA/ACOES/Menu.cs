@@ -1,6 +1,4 @@
 ﻿using NASA.DB;
-using NASA.DTO;
-
 namespace NASA.ACOES;
 
 public class Menu

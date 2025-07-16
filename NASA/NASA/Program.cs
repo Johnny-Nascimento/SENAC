@@ -3,25 +3,6 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace NASA;
 
-/*
-    Gerenciador de Missões Espaciais
-        Estamos iniciando as missões espaciais do +Devs2Blu e para isso, queremos fazer um software para nosso programa espacial.
-
-        Após uma conversa com nosso centro de operações, identificamos as seguintes necessidades:
-            1 - Cadastrar os astronautas: Precisamos encontrar uma forma de cadastrar nossos astronautas informando seu nome, 
-                data de nascimento e pais de origem;
-            2 - Realizar lançamentos: Ao realizarmos um lançamento devemos informar quais são os astronautas envolvidos,
-                o nome da missão e quanto tempo ela vai durar em dias;
-            3 - Atualizar resultado da missão: Devemos conseguir buscar por uma missão e dizer se ela foi um sucesso ou se tivemos um problema.
-            4 - Devemos conseguir colocar detalhes sobre essa missão;
-                Saber quantos lançamentos já realizamos.
-
-            Bonus - Destino viagem
-            Animação de uma nave ascii
-            Musica interestellar via console
- */
-
-
 public class ResultadoMissao
 {
     private MissaoEspacial Missao;
@@ -43,9 +24,7 @@ public class ResultadoMissao
             Console.WriteLine(astronauta.ToString());
 
         Console.WriteLine("Não teve problemas, apesar de:");
-
-        Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-        Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        Console.WriteLine();
 
         const int LINHAS_ARQUIVOS = 100;
 
@@ -64,6 +43,7 @@ public class ResultadoMissao
             Console.WriteLine($"O(A) Astronauta {astronauta.Nome}");
 
             Console.WriteLine(acontecimentosAstronautas[linhaRandom]);
+            linhaRandom = random.Next(1, LINHAS_ARQUIVOS);
         }
 
         List<string> acontecimentosMissao = new List<string>();
@@ -75,8 +55,18 @@ public class ResultadoMissao
 
         linhaRandom = random.Next(1, LINHAS_ARQUIVOS);
 
+        Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        Console.WriteLine();
+
         Console.WriteLine($"A missão {Missao.NomeMissao} foi um sucesso, apesar de um pequeno detalhe:");
+        Console.WriteLine();
+
         Console.WriteLine(acontecimentosMissao[linhaRandom]);
+
+        Console.WriteLine("Aperte qualquer tecla para voltar...");
+        Console.ReadKey();
+        Console.Clear();
     }
 }
 
@@ -114,6 +104,14 @@ public class MissaoEspacial
 public class AstronautaDB
 {
     public static List<Astronauta> Astronautas { get; } = new List<Astronauta>();
+
+    public AstronautaDB()
+    {
+        // Dados para facilitar testes
+        Astronautas.Add(new Astronauta("Jorge", new DateOnly(2025, 01, 01), "Brasil"));
+        Astronautas.Add(new Astronauta("Marcio", new DateOnly(2025, 05, 01), "Alemanha"));
+        Astronautas.Add(new Astronauta("Marcos", new DateOnly(2025, 12, 01), "Africa"));
+    }
 
     public static void CadastrarAstronauta()
     {
@@ -168,6 +166,9 @@ public class Menu
 
     private static void RealizarLancamento()
     {
+        const string NAVE_DECOLANDO = "       !\r\n       !\r\n       ^\r\n      / \\\r\n     /___\\\r\n    |=   =|\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n   /|##!##|\\\r\n  / |##!##| \\\r\n /  |##!##|  \\\r\n|  /      \\  |\r\n| /        \\ |\r\n|/          \\|\r\n";
+        const string NAVE_VOANDO    = "       !\r\n       !\r\n       ^\r\n      / \\\r\n     /___\\\r\n    |=   =|\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n    |     |\r\n   /|##!##|\\\r\n  / |##!##| \\\r\n /  |##!##|  \\\r\n|  / ^ | ^ \\  |\r\n| /  ( | )  \\ |\r\n|/   ( | )   \\|\r\n    ((   ))\r\n   ((  :  ))\r\n   ((  :  ))\r\n    ((   ))\r\n     (( ))\r\n      ( )\r\n       .\r\n       .\r\n       .";
+
         Console.WriteLine("Selecione o numero de identificação dos astronautas separado por: , (ex: 1,2,3,7)");
         var astronautas = AstronautaDB.Astronautas;
         for (int i = 0; i < astronautas.Count; ++i)
@@ -199,7 +200,7 @@ public class Menu
         // Validar dados ?
         // Validar dados ?
 
-        new MissaoEspacial(astronautas, nomeDaMissao, duracaoMissao);
+        new MissaoEspacial(astronautasParaLancamento, nomeDaMissao, duracaoMissao);
 
         Console.Clear();
 
@@ -211,9 +212,22 @@ public class Menu
             Thread.Sleep(1000);
         }
 
-        // ASCII de um foguete
+        Thread.Sleep(500);
 
-        Console.WriteLine("A missão foi lançada com sucesso");
+        Console.BackgroundColor = ConsoleColor.DarkBlue;
+        Console.Clear();
+        Console.WriteLine(NAVE_DECOLANDO);
+        Thread.Sleep(1000);
+        Console.Clear();
+        Console.WriteLine(NAVE_VOANDO);
+
+        Console.WriteLine();
+        Console.WriteLine("A missão foi lançada com sucesso!");
+        Console.WriteLine();
+        Console.WriteLine("Aperte qualquer tecla para voltar...");
+        Console.ReadKey();
+        Console.BackgroundColor = ConsoleColor.Black;
+        Console.Clear();
     }
 
     private static void MostraOpcoesTexto()
@@ -269,6 +283,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        new AstronautaDB();
         Menu.Mostrar();
     }
 }

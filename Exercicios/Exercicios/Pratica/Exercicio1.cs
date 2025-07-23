@@ -2,6 +2,7 @@
 {
     internal class Exercicio1
     {
+        // Teste
         //Operadores Aritméticos
 
         //1. Escreva um programa que leia dois números inteiros e exiba a soma deles.

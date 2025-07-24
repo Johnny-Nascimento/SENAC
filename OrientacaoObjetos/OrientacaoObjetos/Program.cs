@@ -135,5 +135,22 @@ internal class Program
         // 
         // Sistema.AlteraValores(ref n1, ref n2); // , out n3); out parte do principio de que o valor vai ser atribuido no método
         // Console.WriteLine(n1 + " " + n2 + " " + n3);
+
+        /* // Possivel erro ao tornar lista cópia
+            List<Aluno> alunos = new List<Aluno>();
+            alunos.Add(new Aluno("Roberto", 10));
+
+            List<Aluno> alunos2 = new List<Aluno>();
+            alunos2.AddRange(alunos);
+
+            alunos2[0].Nome = "XXX";
+            alunos2[0].Idade = 666;
+
+            Console.WriteLine("Aluno1");
+            Console.WriteLine(alunos[0].Nome + " " + alunos[0].Idade);
+
+            Console.WriteLine("Aluno2");
+            Console.WriteLine(alunos2[0].Nome + " " + alunos2[0].Idade);
+        */
     }
 }

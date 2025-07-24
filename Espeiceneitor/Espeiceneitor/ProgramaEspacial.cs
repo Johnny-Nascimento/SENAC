@@ -1,10 +1,5 @@
 ﻿using Espeiceneitor.Entidades;
 using Espeiceneitor.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Espeiceneitor
 {
@@ -189,41 +184,56 @@ namespace Espeiceneitor
 
         private static void RealizarLancamento()
         {
-            // Selecionar a missão
-            ListagemMissoes();
-            int idMissao = ConsoleUtil.InteragirInt("Informe o ID da missão: ");
-            Missao missao = BuscarMissao(idMissao);
+            try
+            {
+                // Selecionar a missão
+                ListagemMissoes();
+                int idMissao = ConsoleUtil.InteragirInt("Informe o ID da missão: ");
+                Missao missao = BuscarMissao(idMissao);
 
-            // Selecionar os astronautas
-            bool continuar = false;
-            List<Astronauta> astronautasLancamento = new List<Astronauta>();
-            do
+                // Selecionar os astronautas
+                bool continuar = false;
+                List<Astronauta> astronautasLancamento = new List<Astronauta>();
+                do
+                {
+                    Console.Clear();
+                    Console.WriteLine("Adição de astronautas - 0 PARA FINALIZAR!");
+
+                    ListagemAstronautas();
+                    int idAstronauta = ConsoleUtil.InteragirInt("Informe o ID do astronauta: ");
+                    if (idAstronauta == 0)
+                    {
+                        continuar = false;
+                    }
+                    else
+                    {
+                        Astronauta astronauta = BuscarAstronauta(idAstronauta);
+
+                        astronautasLancamento.Add(astronauta);
+                        continuar = true;
+                    }
+                } while (continuar);
+
+                var lancamento = new Lancamento(missao, astronautasLancamento);
+                lancamento.Missao.StatusMissao = StatusMissao.EmLancamento;
+
+                Console.WriteLine("Realizado lançamento!");
+                ConsoleUtil.AguardarTecla();
+
+                lancamento.Create();
+            }
+            catch (NullReferenceException ex) 
             {
                 Console.Clear();
-                Console.WriteLine("Adição de astronautas - 0 PARA FINALIZAR!");
 
-                ListagemAstronautas();
-                int idAstronauta = ConsoleUtil.InteragirInt("Informe o ID do astronauta: ");
-                if (idAstronauta == 0)
-                {
-                    continuar = false;
-                }
-                else
-                {
-                    Astronauta astronauta = BuscarAstronauta(idAstronauta);
+                Console.WriteLine($"Houve um erro ao realizar lançamento erro: {ex.Message}");
 
-                    astronautasLancamento.Add(astronauta);
-                    continuar = true;
-                }
-            } while (continuar);
-
-            var lancamento = new Lancamento(missao, astronautasLancamento);
-            lancamento.Missao.StatusMissao = StatusMissao.EmLancamento;
-
-            Console.WriteLine("Realizado lançamento!");
-            ConsoleUtil.AguardarTecla();
-
-            lancamento.Create();
+                ConsoleUtil.AguardarTecla();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Houve um erro desconhecido erro: {ex.Message}");
+            }
         }
 
         private static void ListagemLancamentos()

@@ -32,6 +32,11 @@ public class Animal
         Console.WriteLine($"{NomeCientifico} mordendo");
     }
 
+    public virtual void EmitirSom()
+    {
+        Console.WriteLine("Animal emitindo som");
+    }
+
     public override string ToString()
     {
         return $"{Nome} {NomeCientifico} {Idade}";

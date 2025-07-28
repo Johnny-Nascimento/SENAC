@@ -4,9 +4,22 @@ namespace OrientacaoObjetos.Mao_na_Massa;
 
 public class Produto
 {
-    public string Nome { get; set; }
-    public double Preco { get; set; }
+    private string Nome { get; set; }
+    private double Preco { get; set; }
     public int QuantidadeEstoque { get; set; }
+
+    public void AlterarPreco(double preco)
+    {
+        if (preco < 0)
+            return;
+
+        Preco = preco;
+    }
+
+    public void AlterarNome(string nome)
+    {
+        Nome = nome;
+    }
 
     public static string FormataValor(Produto produto, bool internacional = false)
     {

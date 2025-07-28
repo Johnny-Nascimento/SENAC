@@ -136,7 +136,8 @@ internal class Program
         // Sistema.AlteraValores(ref n1, ref n2); // , out n3); out parte do principio de que o valor vai ser atribuido no método
         // Console.WriteLine(n1 + " " + n2 + " " + n3);
 
-        /* // Possivel erro ao tornar lista cópia
+        /* 
+            // Possivel erro ao tornar lista cópia
             List<Aluno> alunos = new List<Aluno>();
             alunos.Add(new Aluno("Roberto", 10));
 
@@ -152,5 +153,38 @@ internal class Program
             Console.WriteLine("Aluno2");
             Console.WriteLine(alunos2[0].Nome + " " + alunos2[0].Idade);
         */
+
+        /*
+        Produto produto = new Produto("Roda", 10.00);
+        produto.ExibirInfo();
+        Console.WriteLine("Info nome original ^^");
+        produto.AlterarNome("Roda redonda");
+        produto.AlterarPreco(-10.00);
+        produto.ExibirInfo();
+        Console.WriteLine("Tentativa e nome alterado negativo ^^");
+
+        produto.AlterarPreco(20.00);
+        produto.ExibirInfo();
+        Console.WriteLine("Tentativa positivo ^^");
+        */
+
+        Animal animal = new Animal();
+        // animal.EmitirSom();
+
+        Cachorro cachorro = new Cachorro();
+        // cachorro.EmitirSom();
+
+        Gato gato = new Gato();
+        // gato.EmitirSom();
+
+        List<Animal> animais = new List<Animal>();
+        animais.Add(animal);
+        animais.Add(cachorro);
+        animais.Add(gato);
+
+        foreach (var item in animais)
+        {
+            item.EmitirSom();
+        }
     }
 }

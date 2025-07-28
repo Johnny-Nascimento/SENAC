@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,8 +23,16 @@ namespace Espeiceneitor.Entidades
         {
             get
             {
+                ILoggerFactory l = new LoggerFactory();
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<Astronauta, Astronauta>(), l);
+                var mapper = config.CreateMapper();
+
                 var retorno = new List<Astronauta>();
-                retorno.AddRange(_Astronautas);
+
+                foreach (var astronauta in _Astronautas)
+                {
+                    retorno.Add(mapper.Map<Astronauta>(astronauta));
+                }
 
                 return retorno;
             }

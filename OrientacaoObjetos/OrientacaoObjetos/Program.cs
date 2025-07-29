@@ -5,14 +5,6 @@ namespace OrientacaoObjetos;
 
 internal class Program
 {
-    static async Task ExecutarAsync(List<InstrumentoMusical> instrumentos)
-    {
-        foreach (var item in instrumentos)
-        {
-            item.Tocar();
-        }
-    }
-
     static void Main(string[] args)
     {
         // Carro uno = new Carro();
@@ -204,6 +196,14 @@ internal class Program
         instrumentos.Add(violao);
         instrumentos.Add(tambor);
 
-        ExecutarAsync(instrumentos);
+        ExecutarInstrumentos(instrumentos);
+    }
+
+    static void ExecutarInstrumentos(List<InstrumentoMusical> instrumentos)
+    {
+        foreach (var item in instrumentos)
+        {
+            new Thread(item.Tocar).Start();
+        }
     }
 }

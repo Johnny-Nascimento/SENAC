@@ -2,41 +2,48 @@
 
 internal class Tambor : InstrumentoMusical
 {
-    public async override void Tocar()
+    public override void Tocar()
     {
-        Console.WriteLine("Tambor..");
-        Console.Beep(37, 1000);
-
-        Console.Write("Tambor...");
+        Console.Write("Tambor");
+        base.Esperar();
+        Console.Write("Tambor Fim");
     }
 }
 
 internal class Violao : InstrumentoMusical
 {
-    public async override void Tocar()
+    public override void Tocar()
     {
-        Console.WriteLine("Violao..");
-        Console.Beep(37, 1000);
-
-        Console.Write("Violao...");
+        Console.Write("Violao");
+        base.Esperar();
+        Console.Write("Violao Fim");
     }
 }
 
 internal class Piano : InstrumentoMusical
 {
-    public async override void Tocar()
+    public override void Tocar()
     {
-        Console.Write("Piano..");
-        Console.Beep(37, 1000);
-
-        Console.Write("Piano...");
+        Console.Write("Piano");
+        base.Esperar();
+        Console.Write("Piano Fim");
     }
 }
 
 internal class InstrumentoMusical
 {
-    public async virtual void Tocar()
+    public virtual void Tocar()
     {
         Console.WriteLine("Nenhum som");
+    }
+
+    public void Esperar()
+    {
+        Thread.Sleep(800);
+        Console.Write(".");
+        Thread.Sleep(800);
+        Console.Write(".");
+        Thread.Sleep(800);
+        Console.Write(".");
     }
 }

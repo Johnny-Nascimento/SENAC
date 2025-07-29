@@ -5,6 +5,14 @@ namespace OrientacaoObjetos;
 
 internal class Program
 {
+    static async Task ExecutarAsync(List<InstrumentoMusical> instrumentos)
+    {
+        foreach (var item in instrumentos)
+        {
+            item.Tocar();
+        }
+    }
+
     static void Main(string[] args)
     {
         // Carro uno = new Carro();
@@ -168,23 +176,34 @@ internal class Program
         Console.WriteLine("Tentativa positivo ^^");
         */
 
-        Animal animal = new Animal();
-        // animal.EmitirSom();
+        //Animal animal = new Animal();
+        //// animal.EmitirSom();
 
-        Cachorro cachorro = new Cachorro();
-        // cachorro.EmitirSom();
+        //Cachorro cachorro = new Cachorro();
+        //// cachorro.EmitirSom();
 
-        Gato gato = new Gato();
-        // gato.EmitirSom();
+        //Gato gato = new Gato();
+        //// gato.EmitirSom();
 
-        List<Animal> animais = new List<Animal>();
-        animais.Add(animal);
-        animais.Add(cachorro);
-        animais.Add(gato);
+        //List<Animal> animais = new List<Animal>();
+        //animais.Add(animal);
+        //animais.Add(cachorro);
+        //animais.Add(gato);
 
-        foreach (var item in animais)
-        {
-            item.EmitirSom();
-        }
+        //foreach (var item in animais)
+        //{
+        //    item.EmitirSom();
+        //}
+
+        Piano piano = new Piano();
+        Violao violao = new Violao();
+        Tambor tambor = new Tambor();
+
+        List<InstrumentoMusical> instrumentos = new List<InstrumentoMusical>();
+        instrumentos.Add(piano);
+        instrumentos.Add(violao);
+        instrumentos.Add(tambor);
+
+        ExecutarAsync(instrumentos);
     }
 }

@@ -2,37 +2,43 @@
 
 internal class Tambor : InstrumentoMusical
 {
-    public override void Tocar()
+    public override void Tocar(int line)
     {
+        Console.SetCursorPosition(0, line);
         Console.Write("Tambor");
         base.Esperar();
-        Console.Write("Tambor Fim");
+        Console.SetCursorPosition(0, line);
+        Console.Write("[Tambor END]");
     }
 }
 
 internal class Violao : InstrumentoMusical
 {
-    public override void Tocar()
+    public override void Tocar(int line)
     {
+        Console.SetCursorPosition(0, line);
         Console.Write("Violao");
         base.Esperar();
-        Console.Write("Violao Fim");
+        Console.SetCursorPosition(0, line);
+        Console.Write("[Violao END]");
     }
 }
 
 internal class Piano : InstrumentoMusical
 {
-    public override void Tocar()
+    public override void Tocar(int line)
     {
+        Console.SetCursorPosition(0, line);
         Console.Write("Piano");
         base.Esperar();
-        Console.Write("Piano Fim");
+        Console.SetCursorPosition(0, line);
+        Console.Write("[Piano END]");
     }
 }
 
 internal class InstrumentoMusical
 {
-    public virtual void Tocar()
+    public virtual void Tocar(int line)
     {
         Console.WriteLine("Nenhum som");
     }
@@ -40,10 +46,5 @@ internal class InstrumentoMusical
     public void Esperar()
     {
         Thread.Sleep(800);
-        Console.Write(".");
-        Thread.Sleep(800);
-        Console.Write(".");
-        Thread.Sleep(800);
-        Console.Write(".");
     }
 }

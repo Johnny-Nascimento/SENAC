@@ -187,23 +187,47 @@ internal class Program
         //    item.EmitirSom();
         //}
 
+        // Permite digitar muitas coisas no console.
+        Console.SetBufferSize(120, 1000);
+
         Piano piano = new Piano();
         Violao violao = new Violao();
         Tambor tambor = new Tambor();
 
-        List<InstrumentoMusical> instrumentos = new List<InstrumentoMusical>();
-        instrumentos.Add(piano);
-        instrumentos.Add(violao);
-        instrumentos.Add(tambor);
+        int line = 0;
 
-        ExecutarInstrumentos(instrumentos);
+        while (true)
+        {
+            ConsoleKey i = Console.ReadKey(true).Key;
+            switch (i)
+            {
+                case ConsoleKey.NumPad1:
+                    ExecutaInstrumento(piano, line);
+                break;
+
+                case ConsoleKey.NumPad2:
+                    ExecutaInstrumento(violao, line);
+                break;
+
+                case ConsoleKey.NumPad3:
+                    ExecutaInstrumento(tambor, line);
+                break;
+
+                case ConsoleKey.NumPad0:
+                    Thread.Sleep(800);
+                    Console.WriteLine();
+                    Console.WriteLine("Fim");
+                    return;
+                break;
+            }
+
+            ++line;
+        }
     }
 
-    static void ExecutarInstrumentos(List<InstrumentoMusical> instrumentos)
+    static void ExecutaInstrumento(InstrumentoMusical instrumento, int line)
     {
-        foreach (var item in instrumentos)
-        {
-            new Thread(item.Tocar).Start();
-        }
+        Console.SetCursorPosition(0, line);
+        new Thread(() => instrumento.Tocar(line)).Start();
     }
 }

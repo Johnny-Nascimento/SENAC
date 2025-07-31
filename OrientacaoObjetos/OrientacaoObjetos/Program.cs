@@ -188,46 +188,47 @@ internal class Program
         //}
 
         // Permite digitar muitas coisas no console.
-        Console.SetBufferSize(120, 1000);
+        //    Console.SetBufferSize(120, 1000);
 
-        Piano piano = new Piano();
-        Violao violao = new Violao();
-        Tambor tambor = new Tambor();
+        //    Piano piano = new Piano();
+        //    Violao violao = new Violao();
+        //    Tambor tambor = new Tambor();
 
-        int line = 0;
+        //    int line = 0;
 
-        while (true)
-        {
-            ConsoleKey i = Console.ReadKey(true).Key;
-            switch (i)
-            {
-                case ConsoleKey.NumPad1:
-                    ExecutaInstrumento(piano, line);
-                break;
+        //    while (true)
+        //    {
+        //        ConsoleKey i = Console.ReadKey(true).Key;
+        //        switch (i)
+        //        {
+        //            case ConsoleKey.NumPad1:
+        //                ExecutaInstrumento(piano, line);
+        //            break;
 
-                case ConsoleKey.NumPad2:
-                    ExecutaInstrumento(violao, line);
-                break;
+        //            case ConsoleKey.NumPad2:
+        //                ExecutaInstrumento(violao, line);
+        //            break;
 
-                case ConsoleKey.NumPad3:
-                    ExecutaInstrumento(tambor, line);
-                break;
+        //            case ConsoleKey.NumPad3:
+        //                ExecutaInstrumento(tambor, line);
+        //            break;
 
-                case ConsoleKey.NumPad0:
-                    Thread.Sleep(800);
-                    Console.WriteLine();
-                    Console.WriteLine("Fim");
-                    return;
-                break;
-            }
+        //            case ConsoleKey.NumPad0:
+        //                Thread.Sleep(800);
+        //                Console.WriteLine();
+        //                Console.WriteLine("Fim");
+        //                return;
+        //            break;
+        //        }
 
-            ++line;
-        }
-    }
+        //        ++line;
+        //    }
+        //}
 
-    static void ExecutaInstrumento(InstrumentoMusical instrumento, int line)
-    {
-        Console.SetCursorPosition(0, line);
-        new Thread(() => instrumento.Tocar(line)).Start();
+        //static void ExecutaInstrumento(InstrumentoMusical instrumento, int line)
+        //{
+        //    Console.SetCursorPosition(0, line);
+        //    new Thread(() => instrumento.Tocar(line)).Start();
+        //}
     }
 }

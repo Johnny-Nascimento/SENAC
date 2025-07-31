@@ -45,6 +45,6 @@ internal class InstrumentoMusical
 
     public void Esperar()
     {
-        Thread.Sleep(800);
+        Thread.Sleep(500);
     }
 }

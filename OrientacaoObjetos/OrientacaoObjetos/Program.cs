@@ -230,5 +230,16 @@ internal class Program
         //    Console.SetCursorPosition(0, line);
         //    new Thread(() => instrumento.Tocar(line)).Start();
         //}
+
+        // new Retangulo(10, 5).MostraPerimetro();
+        // new Triangulo(5, 2, 3).MostraPerimetro();
+
+        UsuarioSistema usuario = new UsuarioSistema();
+        usuario.User = "Admin";
+        usuario.Password = "Admin";
+
+        usuario.Autenticar();
+        usuario.Deslogar();
+        usuario.Autenticar();
     }
 }

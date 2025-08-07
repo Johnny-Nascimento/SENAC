@@ -3,13 +3,7 @@ using System.Text;
 
 namespace OrientacaoObjetos;
 
-public interface IUsuarioSistema
-{
-    string User { get; set; }
-    string Password { get; set; }
-}
-
-public class UsuarioSistema : IAutenticavel, IUsuarioSistema
+public class UsuarioSistema : IAutenticavel
 {
     private string password = string.Empty;
 
@@ -21,11 +15,12 @@ public class UsuarioSistema : IAutenticavel, IUsuarioSistema
 
     private string GeraHash(string texto)
     {
-        SHA256 sha256 = SHA256.Create();
-
-        var bytes = Encoding.UTF8.GetBytes(texto);
-        var hashBytes = sha256.ComputeHash(bytes);
-        return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+        using (SHA256 sha256 = SHA256.Create())
+        {
+            var bytes = Encoding.UTF8.GetBytes(texto);
+            var hashBytes = sha256.ComputeHash(bytes);
+            return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+        }
     }
 
     public void Autenticar()

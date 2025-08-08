@@ -1,12 +1,63 @@
 ﻿using OrientacaoObjetos.Classes;
 using OrientacaoObjetos.Mao_na_Massa;
+using System.Runtime.ExceptionServices;
 
 namespace OrientacaoObjetos;
+
+public class Dependente
+{
+    public string Nome { get; set; }
+}
+
+public class Funcionario
+{
+    public string Nome { get; set; }
+    public List<Dependente> Dependentes { get; set; } = new List<Dependente>();
+}
+
+public class Filial
+{
+    public string Nome { get; set; }
+    public List<Funcionario> Funcionarios { get; set; } = new List<Funcionario>();
+}
+
+public class Empresa
+{
+    public string Nome { get; set; }
+    public List<Filial> Filiais { get; set; } = new List<Filial>();
+}
 
 internal class Program
 {
     static void Main(string[] args)
     {
+        List<Empresa> Empresas = new List<Empresa>();
+
+        Empresas.Add(new Empresa { Nome = "Empresa A" });
+        Empresas[0].Filiais.Add(new Filial { Nome = "Filial 1" });
+        Empresas[0].Filiais[0].Funcionarios.Add(new Funcionario() { Nome = "José"});
+        Empresas[0].Filiais[0].Funcionarios[0].Dependentes.Add(new Dependente() { Nome = "Maria"});
+        Empresas[0].Filiais[0].Funcionarios[0].Dependentes.Add(new Dependente() { Nome = "Mario" });
+
+        var a = Empresas.Select(e => e.Filiais);
+        var b = a.Select((f, i) => f[i].Funcionarios);
+        var c = b.Select((ff, i) => ff[i].Dependentes);
+        var d = c.Select((dd, i) => dd[i].Nome);
+
+        foreach (var e in d)
+        {
+            Console.WriteLine(e);
+        }
+
+        List<Dependente> uuuu = new List<Dependente>();
+        uuuu.Add(new Dependente(){ Nome = "T"});
+        uuuu.Add(new Dependente() { Nome = "TT" });
+
+
+        var ç = uuuu.Select(O => O.Nome);
+
+        bool t = true;
+
         // Carro uno = new Carro();
         // uno.Marca = "Fiat";
         // uno.Modelo = "Uno";
@@ -234,12 +285,12 @@ internal class Program
         // new Retangulo(10, 5).MostraPerimetro();
         // new Triangulo(5, 2, 3).MostraPerimetro();
 
-        IAutenticavel usuario = new UsuarioSistema();
-        usuario.User = "Admin";
-        usuario.Password = "Admin";
+        // IAutenticavel usuario = new UsuarioSistema();
+        // usuario.User = "Admin";
+        // usuario.Password = "Admin";
 
-        usuario.Autenticar();
-        usuario.Deslogar();
-        usuario.Autenticar();
+        // usuario.Autenticar();
+        // usuario.Deslogar();
+        // usuario.Autenticar();
     }
 }

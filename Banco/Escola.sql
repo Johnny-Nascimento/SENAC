@@ -1,0 +1,115 @@
+CREATE DATABASE escola_db;
+USE escola_db;
+
+CREATE TABLE alergia (
+Id INT AUTO_INCREMENT,
+Nome VARCHAR(255) NOT NULL,
+PRIMARY KEY (Id)
+);
+
+CREATE TABLE turma(
+Id INT AUTO_INCREMENT PRIMARY KEY,
+Serie VARCHAR(10) NOT NULL,
+Nome VARCHAR(255),
+Periodo ENUM("Matutino", "Vespertino", "Noturno")
+);
+
+CREATE TABLE disciplina (
+Id INT AUTO_INCREMENT PRIMARY KEY,
+Nome VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE aluno(
+Id INT AUTO_INCREMENT PRIMARY KEY,
+Nome VARCHAR(255) NOT NULL,
+Matricula VARCHAR(255) NOT NULL,
+CPF VARCHAR(11) NOT NULL,
+DataNascimento DATE NOT NULL,
+IdTurma INT,
+CONSTRAINT FK_ALUNO_TURMA FOREIGN KEY (IdTurma) REFERENCES turma(Id)
+);
+
+CREATE TABLE aluno_alergia (
+Laudo VARCHAR(255),
+Observacao VARCHAR(255),
+IdAlergia INT,
+IdAluno INT,
+PRIMARY KEY (IdAlergia, IdAluno),
+CONSTRAINT FK_ALUNO_ALERGIA_ALUNO FOREIGN KEY (IdAluno) REFERENCES aluno(Id),
+CONSTRAINT FK_ALUNO_ALERGIA_ALERGIA FOREIGN KEY (IdAlergia) REFERENCES alergia(Id)
+);
+
+CREATE TABLE necessidade_especial (
+Id INT PRIMARY KEY,
+Tipo VARCHAR(50),
+Cuidado VARCHAR(50),
+Observacoes VARCHAR(50)
+);
+
+CREATE TABLE necessidade_especial_aluno (
+IdNecessidadeEspecial INT,
+IdAluno INT,
+PRIMARY KEY (IdNecessidadeEspecial, IdAluno),
+CONSTRAINT FK_NECESSIDADE_ESPECIAL_ALUNO FOREIGN KEY (IdAluno) REFERENCES aluno(Id),
+CONSTRAINT FK_NECESSIDADE_ESPECIAL_NE FOREIGN KEY (IdNecessidadeEspecial) REFERENCES necessidade_especial(Id)
+);
+
+CREATE TABLE Responsavel (
+Id INT PRIMARY KEY,
+Nome VARCHAR(255) NOT NULL,
+CPF VARCHAR(11) NOT NULL,
+Telefone VARCHAR(11) NOT NULL,
+Endereco VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE AlunoResponsavel (
+IdAluno INT,
+IdResponsavel INT,
+PRIMARY KEY (IdAluno, IdResponsavel),
+CONSTRAINT FK_ALUNO_RESPONSAVEL_ALUNO FOREIGN KEY (IdAluno) REFERENCES aluno(Id),
+CONSTRAINT FK_ALUNO_RESPONSAVEL_RESPONSAVEL FOREIGN KEY (IdResponsavel) REFERENCES responsavel(Id)
+);
+
+CREATE TABLE avaliacao (
+Id INT PRIMARY KEY,
+Bimestre ENUM("1", "2", "3", "4") NOT NULL,
+Tipo ENUM("Prova", "Trabalho")
+);
+
+CREATE TABLE funcionario (
+Id INT PRIMARY KEY,
+Nome VARCHAR(255) NOT NULL,
+CPF VARCHAR(11) NOT NULL,
+Telefone VARCHAR(11) NOT NULL,
+Cargo ENUM("Professor", "Cozinheiro", "ServiÇos Geral"),
+DataNascimento DATE NOT NULL,
+Periodo ENUM("Matutino", "Vespertino", "Noturno") NOT NULL,
+Salario DOUBLE NOT NULL,
+TipoContrato ENUM("CLT", "PJ") NOT NULL,
+NIS VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE sala (
+Id INT PRIMARY KEY NOT NULL,
+Nome VARCHAR(45) NOT NULL,
+Andar INT NOT NULL,
+Tipo ENUM("Laboratorio", "Auditorio", "Aula") NOT NULL
+);
+
+CREATE TABLE equipamento (
+Id INT PRIMARY KEY NOT NULL,
+Nome VARCHAR(45) NOT NULL,
+NumeroPatrimonio VARCHAR(45) NOT NULL,
+Situacao ENUM("Disponivel", "Ocupado")
+);
+
+CREATE TABLE SalaEquipamento (
+IdEquipamento INT,
+IdSala INT,
+DataHora DATETIME NOT NULL,
+EmUso TINYINT(1) NOT NULL,
+PRIMARY KEY (IdEquipamento, IdSala),
+CONSTRAINT FK_SALA_EQUIPAMENTO_EQUIPAMENTO FOREIGN KEY (IdEquipamento) REFERENCES equipamento(Id),
+CONSTRAINT FK_SALA_EQUIPAMENTO_SALA FOREIGN KEY (IdSala) REFERENCES Sala(Id)
+);
+

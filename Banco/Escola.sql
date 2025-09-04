@@ -1,4 +1,4 @@
-CREATE DATABASE escola_db;
+CREATE DATABASE escola_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE escola_db;
 
 CREATE TABLE alergia (
@@ -11,7 +11,7 @@ CREATE TABLE turma(
 Id INT AUTO_INCREMENT PRIMARY KEY,
 Serie VARCHAR(10) NOT NULL,
 Nome VARCHAR(255),
-Periodo ENUM("Matutino", "Vespertino", "Noturno")
+Periodo ENUM('Matutino', 'Vespertino', 'Noturno')
 );
 
 CREATE TABLE disciplina (
@@ -31,7 +31,8 @@ CONSTRAINT FK_ALUNO_TURMA FOREIGN KEY (IdTurma) REFERENCES turma(Id)
 
 CREATE TABLE aluno_alergia (
 Laudo VARCHAR(255),
-Observacao VARCHAR(255),
+Observacao TEXT,
+DataHora DATETIME NOT NULL,
 IdAlergia INT,
 IdAluno INT,
 PRIMARY KEY (IdAlergia, IdAluno),
@@ -40,10 +41,11 @@ CONSTRAINT FK_ALUNO_ALERGIA_ALERGIA FOREIGN KEY (IdAlergia) REFERENCES alergia(I
 );
 
 CREATE TABLE necessidade_especial (
-Id INT PRIMARY KEY,
+Id INT AUTO_INCREMENT PRIMARY KEY,
 Tipo VARCHAR(50),
 Cuidado VARCHAR(50),
-Observacoes VARCHAR(50)
+Observacoes VARCHAR(50),
+DataHora DATETIME NOT NULL
 );
 
 CREATE TABLE necessidade_especial_aluno (
@@ -54,67 +56,68 @@ CONSTRAINT FK_NECESSIDADE_ESPECIAL_ALUNO FOREIGN KEY (IdAluno) REFERENCES aluno(
 CONSTRAINT FK_NECESSIDADE_ESPECIAL_NE FOREIGN KEY (IdNecessidadeEspecial) REFERENCES necessidade_especial(Id)
 );
 
-CREATE TABLE Responsavel (
-Id INT PRIMARY KEY,
+CREATE TABLE responsavel (
+Id INT AUTO_INCREMENT PRIMARY KEY,
 Nome VARCHAR(255) NOT NULL,
 CPF VARCHAR(11) NOT NULL,
-Telefone VARCHAR(11) NOT NULL,
+Telefone VARCHAR(15) NOT NULL,
 Endereco VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE AlunoResponsavel (
+CREATE TABLE aluno_responsavel (
 IdAluno INT,
 IdResponsavel INT,
+DataHora DATETIME NOT NULL,
 PRIMARY KEY (IdAluno, IdResponsavel),
 CONSTRAINT FK_ALUNO_RESPONSAVEL_ALUNO FOREIGN KEY (IdAluno) REFERENCES aluno(Id),
 CONSTRAINT FK_ALUNO_RESPONSAVEL_RESPONSAVEL FOREIGN KEY (IdResponsavel) REFERENCES responsavel(Id)
 );
 
 CREATE TABLE avaliacao (
-Id INT PRIMARY KEY,
-Bimestre ENUM("1", "2", "3", "4") NOT NULL,
-Tipo ENUM("Prova", "Trabalho")
+Id INT AUTO_INCREMENT PRIMARY KEY,
+Bimestre ENUM('1', '2', '3', '4') NOT NULL,
+Tipo ENUM('Prova', 'Trabalho')
 );
 
 CREATE TABLE funcionario (
-Id INT PRIMARY KEY,
+Id INT AUTO_INCREMENT PRIMARY KEY,
 Nome VARCHAR(255) NOT NULL,
 CPF VARCHAR(11) NOT NULL,
-Telefone VARCHAR(11) NOT NULL,
-Cargo ENUM("Professor", "Cozinheiro", "ServiÇos Geral"),
+Telefone VARCHAR(15) NOT NULL,
+Cargo ENUM('Professor', 'Cozinheiro', 'Serviços Geral'),
 DataNascimento DATE NOT NULL,
-Periodo ENUM("Matutino", "Vespertino", "Noturno") NOT NULL,
+Periodo ENUM('Matutino', 'Vespertino', 'Noturno') NOT NULL,
 Salario DOUBLE NOT NULL,
-TipoContrato ENUM("CLT", "PJ") NOT NULL,
+TipoContrato ENUM('CLT', 'PJ') NOT NULL,
 NIS VARCHAR(45) NOT NULL
 );
 
 CREATE TABLE sala (
-Id INT PRIMARY KEY NOT NULL,
+Id INT AUTO_INCREMENT PRIMARY KEY,
 Nome VARCHAR(45) NOT NULL,
 Andar INT NOT NULL,
-Tipo ENUM("Laboratorio", "Auditorio", "Aula") NOT NULL
+Tipo ENUM('Laboratorio', 'Auditorio', 'Aula') NOT NULL
 );
 
 CREATE TABLE equipamento (
-Id INT PRIMARY KEY NOT NULL,
+Id INT AUTO_INCREMENT PRIMARY KEY,
 Nome VARCHAR(45) NOT NULL,
 NumeroPatrimonio VARCHAR(45) NOT NULL,
-Situacao ENUM("Disponivel", "Ocupado")
+Situacao ENUM('Disponivel', 'Ocupado')
 );
 
-CREATE TABLE SalaEquipamento (
+CREATE TABLE sala_equipamento (
 IdEquipamento INT,
 IdSala INT,
 DataHora DATETIME NOT NULL,
-EmUso TINYINT(1) NOT NULL,
+EmUso BOOLEAN NOT NULL,
 PRIMARY KEY (IdEquipamento, IdSala),
 CONSTRAINT FK_SALA_EQUIPAMENTO_EQUIPAMENTO FOREIGN KEY (IdEquipamento) REFERENCES equipamento(Id),
 CONSTRAINT FK_SALA_EQUIPAMENTO_SALA FOREIGN KEY (IdSala) REFERENCES Sala(Id)
 );
 
-CREATE TABLE Aula (
-Id INT PRIMARY KEY,
+CREATE TABLE aula (
+Id INT AUTO_INCREMENT PRIMARY KEY,
 IdDisciplina INT,
 IdTurma INT,
 IdFuncionario INT,
@@ -126,8 +129,8 @@ CONSTRAINT FK_AULA_FUNCIONARIO FOREIGN KEY (IdFuncionario) REFERENCES funcionari
 CONSTRAINT FK_AULA_SALA FOREIGN KEY (IdSala) REFERENCES sala(Id)
 );
 
-CREATE TABLE AulaAluno (
-Presenca ENUM("Presença", "Falta") NOT NULL,
+CREATE TABLE aula_aluno (
+Presenca ENUM('Presença', 'Falta') NOT NULL,
 IdAula INT,
 IdAluno INT,
 PRIMARY KEY (IdAula, IdAluno),
@@ -135,7 +138,7 @@ CONSTRAINT FK_ALUNO_AULA_AULA FOREIGN KEY (IdAula) REFERENCES aula(Id),
 CONSTRAINT FK_ALUNO_AULA_ALUNO FOREIGN KEY (IdAluno) REFERENCES aluno(Id)
 );
 
-CREATE TABLE AulaAvaliacao (
+CREATE TABLE aula_avaliacao (
 IdAluno INT,
 IdAvaliacao INT,
 IdAula INT,

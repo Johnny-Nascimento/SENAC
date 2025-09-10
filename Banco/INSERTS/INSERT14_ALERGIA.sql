@@ -1,6 +1,6 @@
 -- Alergia
-INSERT INTO Alergia (idAlergia, Nome)
-VALUES (1, 'Glúten');
+INSERT INTO Alergia (Nome)
+VALUES ('Glúten');
 
 -- GERADO POR IA ##############################################################################################################################
 

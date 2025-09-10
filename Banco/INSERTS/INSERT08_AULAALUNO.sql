@@ -106,4 +106,3 @@ VALUES
 ('Presença', 89, 31),
 ('Presença', 92, 71),
 ('Falta', 45, 51);
-

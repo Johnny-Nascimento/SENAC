@@ -34,7 +34,7 @@ VALUES
 ('Presença', 61, 12),
 ('Presença', 22, 77),
 ('Presença', 75, 26),
-('Falta', 27, 61),
+('Falta', 27, 68),
 ('Presença', 73, 33),
 ('Falta', 15, 69),
 ('Presença', 96, 62),

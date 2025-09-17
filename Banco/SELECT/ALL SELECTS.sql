@@ -1,4 +1,3 @@
-
 SELECT * FROM aluno;
 SELECT * FROM alergia;
 SELECT * FROM aluno_alergia;

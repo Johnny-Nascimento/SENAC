@@ -22,3 +22,8 @@ UPDATE colaborador SET nome = 'Colaborador Dos Santos' WHERE id = 2;
 
 -- DELETE
 DELETE FROM viagem_colaborador where viagem_id = 1 AND colaborador_id = 1;
+
+-- Delete lógico
+ALTER TABLE colaborador ADD COLUMN inativo BOOLEAN NOT NULL;
+UPDATE colaborador SET inativo = TRUE WHERE id = 200;
+SELECT * FROM colaborador WHERE inativo = FALSE;

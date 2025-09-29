@@ -1,0 +1,2 @@
+-- Relatorio de Emergencia
+-- Aluno alergia necessidade especial e responsavel.
